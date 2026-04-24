@@ -1,0 +1,34 @@
+{
+  "actorSpecification": 1,
+  "name": "web-search-mcp",
+  "title": "Web Search MCP Server",
+  "description": "An MCP (Model Context Protocol) server that gives AI assistants real-time web search capabilities. Connect Claude, Cursor, or any MCP client to search the web, fetch pages, and retrieve news without leaving your AI workflow.",
+  "version": "1.0.0",
+  "buildTag": "latest",
+  "environmentVariables": {},
+  "dockerfile": "./Dockerfile",
+  "input": "./INPUT_SCHEMA.json",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {},
+      "views": {
+        "overview": {
+          "title": "Search Logs",
+          "transformation": {
+            "fields": ["query", "engine", "resultsCount", "timestamp"]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "query":        { "label": "Query",        "format": "text" },
+              "engine":       { "label": "Engine",       "format": "text" },
+              "resultsCount": { "label": "Results",      "format": "number" },
+              "timestamp":    { "label": "Timestamp",    "format": "datetime" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "actorInputSchemaVersion": 1,
+  "title": "Web Search MCP Server",
+  "description": "Configure the MCP server. After the actor starts, connect your AI client to the provided MCP endpoint URL.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "defaultMaxResults": {
+      "title": "Default max results",
+      "type": "integer",
+      "description": "Default number of search results returned per query (tools can override this).",
+      "default": 10,
+      "minimum": 1,
+      "maximum": 50,
+      "editor": "number"
+    },
+    "braveApiKey": {
+      "title": "Brave Search API key (optional)",
+      "type": "string",
+      "description": "Optional Brave Search API key for higher-quality results. Leave empty to use DuckDuckGo (no key required).",
+      "editor": "textfield",
+      "isSecret": true
+    },
+    "enableFetchTool": {
+      "title": "Enable fetch_page tool",
+      "type": "boolean",
+      "description": "Allow the MCP client to fetch and extract full page content from any URL.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "enableNewsTool": {
+      "title": "Enable search_news tool",
+      "type": "boolean",
+      "description": "Allow the MCP client to search for recent news articles.",
+      "default": true,
+      "editor": "checkbox"
+    },
+    "allowedDomains": {
+      "title": "Allowed domains for fetch_page (optional)",
+      "type": "array",
+      "description": "Whitelist of domains the fetch_page tool can access. Leave empty to allow all.",
+      "editor": "stringList",
+      "items": { "type": "string" }
+    },
+    "logSearches": {
+      "title": "Log searches to dataset",
+      "type": "boolean",
+      "description": "Save every search query and result count to the Apify dataset for auditing.",
+      "default": false,
+      "editor": "checkbox"
+    }
+  }
+}
