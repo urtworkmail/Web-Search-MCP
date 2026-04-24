@@ -1,39 +1,27 @@
 {
   "name": "web-search-mcp",
   "version": "1.0.0",
-  "description": "MCP server that gives AI assistants real-time web search capabilities via DuckDuckGo and Brave Search.",
   "type": "module",
+  "description": "Apify Actor-based MCP server for web searching",
   "main": "src/main.js",
-  "engines": {
-    "node": ">=20"
-  },
-  "scripts": {
-    "start": "node src/main.js",
-    "dev": "node --watch src/main.js",
-    "test": "node src/test.js"
-  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0",
-    "apify": "^3.12.0",
+    "apify": "^3.7.0",
     "cheerio": "^1.0.0",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "got": "^14.4.5",
     "zod": "^3.23.8"
   },
-  "author": "Apify",
-  "license": "Apache-2.0",
-  "keywords": [
-    "apify",
-    "actor",
-    "mcp",
-    "model-context-protocol",
-    "web-search",
-    "ai",
-    "llm",
-    "claude"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-org/web-search-mcp"
-  }
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "nodemon src/main.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "author": "Your Name",
+  "license": "ISC"
 }
