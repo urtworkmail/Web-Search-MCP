@@ -1,5 +1,4 @@
 {
-  "actorInputSchemaVersion": 1,
   "title": "Web Search MCP Server",
   "description": "Configure the MCP server. After the actor starts, connect your AI client to the provided MCP endpoint URL.",
   "type": "object",
@@ -40,7 +39,9 @@
       "type": "array",
       "description": "Whitelist of domains the fetch_page tool can access. Leave empty to allow all.",
       "editor": "stringList",
-      "items": { "type": "string" }
+      "items": {
+        "type": "string"
+      }
     },
     "logSearches": {
       "title": "Log searches to dataset",
