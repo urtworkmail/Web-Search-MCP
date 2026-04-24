@@ -450,7 +450,7 @@ app.get('/', (_req, res) => {
   });
 });
 
-// ─── Start ────────────────────────────────────────────────────────────────────
+// ─── Start ────────────────────────────────────────────────────────────────
 
 const httpServer = app.listen(PORT, () => {
   const url = process.env.ACTOR_STANDBY_URL
@@ -473,12 +473,19 @@ const httpServer = app.listen(PORT, () => {
   log.info('═══════════════════════════════════════════════════════');
 });
 
-// Keep actor alive — Standby mode
-await Actor.standby();
+// Fallback for SDK versions < 3.12.0
+if (typeof Actor.standby === 'function') {
+  await Actor.standby();
+} else {
+  log.warning('Actor.standby() is not available in SDK v3.7.0. Using manual stay-alive.');
+  // This promise never resolves, keeping the Node.js process and Express server active.
+  await new Promise(() => {}); 
+}
 
-// Graceful shutdown
-httpServer.close(() => {
-  log.info('HTTP server closed');
+// Note: In manual stay-alive mode, the code below will only execute on process termination
+process.on('SIGINT', async () => {
+  httpServer.close(async () => {
+    log.info('HTTP server closed');
+    await Actor.exit();
+  });
 });
-
-await Actor.exit();
